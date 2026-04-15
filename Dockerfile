@@ -3,7 +3,15 @@ FROM jupyter/pyspark-notebook:latest
 
 USER root
 
+<<<<<<< HEAD
 # 1. Instalación de dependencias del sistema y entorno visual
+=======
+<<<<<<< HEAD
+# 1. Actualiza repositorios e instala herramientas bï¿½sicas, instala Google Chrome y librerï¿½as necesarias
+=======
+# Instala entorno visual, supervisor y Chrome
+>>>>>>> 3d5e9cb7c5d6b90831e8ee1a9430709166f500d6
+>>>>>>> 17402e219efe418d9f447b1decfe5b0277837a3b
 RUN apt-get update && apt-get install -y \
     wget \
     curl \
@@ -17,6 +25,15 @@ RUN apt-get update && apt-get install -y \
     novnc \
     libnss3 \
     libgbm1 \
+<<<<<<< HEAD
+    libasound2 && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+# 2. Instala librerï¿½as de Python necesarias
+RUN pip install selenium pymongo webdriver-manager
+
+# Vuelve al usuario normal de Jupyter (buena prï¿½ctica de seguridad)
+USER jovyan
+=======
     libasound2 \
     sed \
     && mkdir -p /etc/apt/keyrings \
@@ -53,6 +70,12 @@ RUN sed -i 's/\r$//' /usr/local/bin/start-vnc.sh \
 
 EXPOSE 8888 5900 6080 4040
 
+<<<<<<< HEAD
 # Iniciamos como root para evitar el error de setuid de la sesión anterior
 USER root
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+=======
+# Inicia supervisord
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+>>>>>>> 3d5e9cb7c5d6b90831e8ee1a9430709166f500d6
+>>>>>>> 17402e219efe418d9f447b1decfe5b0277837a3b

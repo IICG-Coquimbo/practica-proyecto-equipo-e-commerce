@@ -1,5 +1,10 @@
 services:
+<<<<<<< HEAD
+
+  # Entorno de trabajo con Python y Spark pre-instalado
+=======
   # Contenedor principal con Jupyter, Spark y entorno visual
+>>>>>>> 3d5e9cb7c5d6b90831e8ee1a9430709166f500d6
   workspace:
     build: .                      # Construye la imagen usando el Dockerfile local
     container_name: bigdata_workspace
