@@ -1,30 +1,4 @@
 services:
-<<<<<<< HEAD
-  # Entorno de trabajo con Python y Spark pre-instalado
-  workspace:
-    build: .
-    container_name: bigdata_workspace
-    ports:
-      - "8888:8888" # Jupyter Lab
-      - "4040:4040" # Panel de control de Spark
-    volumes:
-      - .:/home/jovyan/work
-    environment:
-      - JUPYTER_TOKEN=
-      - JUPYTER_PASSWORD="iicg2026"
-      - JUPYTER_ALLOW_INSECURE_WRITES=true
-
-  # Base de Datos NoSQL
-  database:
-    image: mongo:latest
-    container_name: bigdata_mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-      
-  # EL SERVICIO QUE FALTA PARA EL PUERTO 8081
-=======
   # Contenedor principal con Jupyter, Spark y entorno visual
   workspace:
     build: .                      # Construye la imagen usando el Dockerfile local
@@ -59,7 +33,6 @@ services:
       - mongo_data:/data/db       # Guarda los datos de forma persistente
       
     # EL SERVICIO QUE FALTA PARA EL PUERTO 8081
->>>>>>> 3d5e9cb7c5d6b90831e8ee1a9430709166f500d6
   admin-db:
     image: mongo-express:latest
     container_name: bigdata_ui
@@ -71,11 +44,7 @@ services:
       - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
     depends_on:
       - database
-<<<<<<< HEAD
-
-=======
       
 # Volumen persistente para MongoDB
->>>>>>> 3d5e9cb7c5d6b90831e8ee1a9430709166f500d6
 volumes:
   mongo_data:
