@@ -1,0 +1,24 @@
+2026-04-22 13:56:25,365 INFO supervisord started with pid 7
+2026-04-22 13:56:26,372 INFO spawned: 'desktop' with pid 8
+2026-04-22 13:56:26,381 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 13:56:27,386 INFO spawned: 'desktop' with pid 9
+2026-04-22 13:56:27,392 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 13:56:29,404 INFO spawned: 'desktop' with pid 10
+2026-04-22 13:56:29,419 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 13:56:32,433 INFO spawned: 'desktop' with pid 18
+2026-04-22 13:56:32,442 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 13:56:33,446 INFO gave up: desktop entered FATAL state, too many start retries too quickly
+2026-04-22 14:00:18,735 WARN received SIGTERM indicating exit request
+2026-04-22 14:00:40,028 INFO Set uid to user 0 succeeded
+2026-04-22 14:00:40,038 INFO supervisord started with pid 7
+2026-04-22 14:00:41,046 INFO spawned: 'desktop' with pid 8
+2026-04-22 14:00:41,060 INFO spawned: 'jupyter' with pid 9
+2026-04-22 14:00:41,064 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 14:00:42,072 INFO spawned: 'desktop' with pid 10
+2026-04-22 14:00:42,079 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 14:00:44,828 INFO spawned: 'desktop' with pid 43
+2026-04-22 14:00:44,836 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 14:00:46,840 INFO success: jupyter entered RUNNING state, process has stayed up for > than 5 seconds (startsecs)
+2026-04-22 14:00:47,849 INFO spawned: 'desktop' with pid 45
+2026-04-22 14:00:47,857 INFO exited: desktop (exit status 127; not expected)
+2026-04-22 14:00:48,860 INFO gave up: desktop entered FATAL state, too many start retries too quickly
