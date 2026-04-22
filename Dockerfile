@@ -29,11 +29,10 @@ RUN wget https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_
 # 5. Configuraci�n de visualizaci�n (noVNC)
 COPY start-vnc.sh /usr/local/bin/start-vnc.sh
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-RUN chmod +x /usr/local/bin/start-vnc.sh
+RUN apt-get update && apt-get install -y dos2unix && \
+    dos2unix /usr/local/bin/start-vnc.sh && \
+    chmod +x /usr/local/bin/start-vnc.sh
 
 ENV DISPLAY=:99
-
-USER root
-WORKDIR /home/jovyan/work
-
-CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+# Supervisor lanza Jupyter y el Entorno Gr�fico al mismo tiempo
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
