@@ -8,8 +8,8 @@ services:
     ports:
       - "8888:8888"               # Jupyter Lab
       - "4040:4040"               # Interfaz web de Spark
-      #- "5900:5900"               # Acceso VNC al escritorio
-      #- "6080:6080"               # Acceso noVNC desde navegador
+      - "5900:5900"               # Acceso VNC al escritorio
+      - "6080:6080"               # Acceso noVNC desde navegador
 
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
@@ -57,7 +57,7 @@ services:
     container_name: bigdata_mongodb
     platform: linux/amd64
     ports:
-      - "27040:27017"             # Puerto de MongoDB local
+      - "27017:27017"             # Puerto de MongoDB local
 
     volumes:
       - mongo_data:/data/db       # Guarda los datos de forma persistente
@@ -75,7 +75,7 @@ services:
     container_name: bigdata_ui_local
     restart: always
     ports:
-      - "8084:8081"
+      - "8081:8081"
     environment:
       # Se conecta al servicio 'database' definido arriba
       - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
