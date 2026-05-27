@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-version: '3.8'
-
-services:
-  # Entorno de trabajo con Python y Spark pre-instalado
-  workspace:
-    image: jupyter/pyspark-notebook:latest
-    container_name: bigdata_workspace
-    ports:
-      - "8888:8888" # Jupyter Lab
-      - "4040:4040" # Panel de control de Spark
-    volumes:
-      - .:/home/jovyan/work
-    environment:
-      - JUPYTER_TOKEN=
-      - JUPYTER_PASSWORD=""
-      - JUPYTER_ALLOW_INSECURE_WRITES=true
-
-  # Base de Datos NoSQL
-  database:
-    image: mongo:latest
-    container_name: bigdata_mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
-
-volumes:
-  mongo_data:
-=======
 services:
   # Contenedor principal con Jupyter, Spark y entorno visual
   workspace:
@@ -38,8 +8,8 @@ services:
     ports:
       - "8888:8888"               # Jupyter Lab
       - "4040:4040"               # Interfaz web de Spark
-      - "5900:5900"               # Acceso VNC al escritorio
-      - "6080:6080"               # Acceso noVNC desde navegador
+      #- "5900:5900"               # Acceso VNC al escritorio
+      #- "6080:6080"               # Acceso noVNC desde navegador
 
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
@@ -54,11 +24,6 @@ services:
       # Fuerza el uso de JupyterLab de forma explícita
       - JUPYTER_ENABLE_LAB=yes
 
-      # --- OPCIONAL ---
-      # Puedes guardar aquí una cadena Atlas para usarla desde Python si quieres
-      # OJO: también puedes ponerla en un archivo .env para no exponer credenciales
-      # - MONGO_ATLAS_URI=mongodb+srv://usuario:password@cluster0.mongodb.net/?retryWrites=true&w=majority
-
     shm_size: "2gb"               # Evita fallos del navegador por poca memoria compartida
 
     depends_on:
@@ -71,13 +36,9 @@ services:
     # especialmente si usas conexiones mongodb+srv:// hacia Atlas
     dns:
       - 8.8.8.8
-<<<<<<< HEAD
-    #user: root
-=======
 
     # --- AGREGADO ---
     # Reinicia automáticamente si el contenedor falla
->>>>>>> 0019be0697ffb2017e03fc85194da7cb28b747b1
     restart: always
 
     # --- AGREGADO ---
@@ -91,7 +52,7 @@ services:
     container_name: bigdata_mongodb
     platform: linux/amd64
     ports:
-      - "27017:27017"             # Puerto de MongoDB local
+      - "27040:27017"             # Puerto de MongoDB local
 
     volumes:
       - mongo_data:/data/db       # Guarda los datos de forma persistente
@@ -109,11 +70,8 @@ services:
     container_name: bigdata_ui_local
     restart: always
     ports:
-      - "8081:8081"
+      - "8084:8081"
     environment:
-<<<<<<< HEAD
-      - ME_CONFIG_MONGODB_URL=mongodb+srv://Renato_Villalobos:ubeiW7202\@@#%@cluster0.khaasrk.mongodb.net/?retryWrites=true&w=majority
-=======
       # Se conecta al servicio 'database' definido arriba
       - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
 
@@ -142,7 +100,6 @@ services:
       # --- AGREGADO ---
       # Habilita funciones administrativas en mongo-express
       - ME_CONFIG_MONGODB_URL=mongodb+srv://usuario:password@cluster0.kthdyh1.mongodb.net/?retryWrites=true&w=majority
->>>>>>> 0019be0697ffb2017e03fc85194da7cb28b747b1
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
 
       # --- OPCIONAL ---
@@ -184,53 +141,5 @@ volumes:
 networks:
   bigdata_net:
     driver: bridge
-<<<<<<< HEAD
-    name: BigData_Network_UCN
-=======
     name: BigData_Network_UCN
 
-# -------------------------------------------------------------------
-# COSAS QUE PODRÍAS ELIMINAR SI EN ALGÚN MOMENTO USAS SOLO ATLAS
-# -------------------------------------------------------------------
-
-# Si en el futuro quisieras trabajar SOLO con Atlas, podrías comentar o eliminar:
-#
-# 1) El servicio database:
-#
-# database:
-#   image: mongo:latest
-#   container_name: bigdata_mongodb
-#   platform: linux/amd64
-#   ports:
-#     - "27017:27017"
-#   volumes:
-#     - mongo_data:/data/db
-#
-# 2) El servicio admin-db (el visualizador de Mongo LOCAL):
-#
-# admin-db:
-#   image: mongo-express:latest
-#   container_name: bigdata_ui_local
-#   ports:
-#     - "8081:8081"
-#   environment:
-#     - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
-#
-# 3) El volumen local mongo_data:
-#
-# volumes:
-#   mongo_data:
-#
-# 4) En workspace, el depends_on hacia database y admin-db:
-#
-# depends_on:
-#   - database
-#   - admin-db
-#   - admin-db-atlas
-#
-# podría quedar solo así:
-#
-# depends_on:
-#   - admin-db-atlas
->>>>>>> 54b381f35ec75e2024437e21de1d9cac0cf42a06
->>>>>>> 0019be0697ffb2017e03fc85194da7cb28b747b1
