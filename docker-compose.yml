@@ -6,8 +6,8 @@ services:
     ports:
       - "8888:8888"
       - "4040:4040"
-      - "5900:5900"
-      - "6080:6080"
+      #- "5900:5900"
+      #- "6080:6080"
     volumes:
       - .:/home/jovyan/work
     environment:
@@ -32,7 +32,7 @@ services:
     container_name: bigdata_mongodb
     platform: linux/amd64
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongo_data:/data/db
     restart: always
