@@ -10,6 +10,7 @@ services:
       - "4040:4040"               # Interfaz web de Spark
       #- "5900:5900"               # Acceso VNC al escritorio
       #- "6080:6080"               # Acceso noVNC desde navegador
+      - "8501:8501" 
 
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
@@ -41,13 +42,9 @@ services:
     # especialmente si usas conexiones mongodb+srv:// hacia Atlas
     dns:
       - 8.8.8.8
-<<<<<<< HEAD
-    #user: root
-=======
 
     # --- AGREGADO ---
     # Reinicia automáticamente si el contenedor falla
->>>>>>> 0019be0697ffb2017e03fc85194da7cb28b747b1
     restart: always
 
     # --- AGREGADO ---
@@ -81,9 +78,6 @@ services:
     ports:
       - "8081:8081"
     environment:
-<<<<<<< HEAD
-      - ME_CONFIG_MONGODB_URL=mongodb+srv://Renato_Villalobos:ubeiW7202\@@#%@cluster0.khaasrk.mongodb.net/?retryWrites=true&w=majority
-=======
       # Se conecta al servicio 'database' definido arriba
       - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
 
@@ -111,8 +105,7 @@ services:
       # Reemplaza usuario, password y cluster por tus datos reales de Atlas
       # --- AGREGADO ---
       # Habilita funciones administrativas en mongo-express
-      - ME_CONFIG_MONGODB_URL=mongodb+srv://usuario:password@cluster0.kthdyh1.mongodb.net/?retryWrites=true&w=majority
->>>>>>> 0019be0697ffb2017e03fc85194da7cb28b747b1
+      - ME_CONFIG_MONGODB_URL=mongodb+srv://JavieraMorales:Javi28122004@cluster0.as1zz9d.mongodb.net/ecommerce.processed_data?retryWrites=true&w=majority\
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
 
       # --- OPCIONAL ---
