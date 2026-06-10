@@ -42,6 +42,7 @@ RUN wget https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_
 
 # 3. Librer�as de Python para todo el curso (Scraping + Atlas + Spark)
 RUN pip install --no-cache-dir --upgrade pip && \
+    pyspark==3.5.0
     #pip install --no-cache-dir "pymongo[srv]" dnspython certifi selenium webdriver-manager pandas
     pip install --no-cache-dir "pymongo[srv]" dnspython selenium webdriver-manager pandas certifi
 RUN pip install --no-cache-dir streamlit seaborn openpyxl
