@@ -8,9 +8,10 @@ services:
     ports:
       - "8888:8888"               # Jupyter Lab
       - "4040:4040"               # Interfaz web de Spark
+      - "8501:8501"
       #- "5900:5900"               # Acceso VNC al escritorio
       #- "6080:6080"               # Acceso noVNC desde navegador
-
+      
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
 
