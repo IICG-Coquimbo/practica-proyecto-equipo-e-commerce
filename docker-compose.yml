@@ -19,11 +19,13 @@ services:
       - JUPYTER_ALLOW_INSECURE_WRITES=true  # Permite escritura en volúmenes montados
       - DISPLAY=:99               # Pantalla virtual usada por el entorno gráfico
       - JUPYTER_ENABLE_LAB=yes    # Fuerza el uso de JupyterLab de forma explícita
+      - MONGODB_URI=mongodb+srv://JavieraMorales:Javi28122004@cluster0.as1zz9d.mongodb.net/?retryWrites=true&w=majority
     shm_size: "2gb"               # Evita fallos del navegador por poca memoria compartida
     depends_on:
       - database
-    dns:
-      - 8.8.8.8
+    #dns:
+      #- 8.8.8.8
+      #- 1.1.1.1
     restart: always
     networks:
       - bigdata_net
