@@ -29,6 +29,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 2. Instalación de JARs: Versión 10.3.0 (Compatible con Spark 3.5)
+# Limpiamos la carpeta primero para que no queden versiones viejas chocando
 RUN rm -f /usr/local/spark/jars/mongo-spark-connector* && \
     rm -f /usr/local/spark/jars/mongodb-driver* && \
     rm -f /usr/local/spark/jars/bson*
@@ -39,10 +40,12 @@ RUN wget https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_
     wget https://repo1.maven.org/maven2/org/mongodb/bson/4.11.1/bson-4.11.1.jar -P /usr/local/spark/jars/ && \
     wget https://repo1.maven.org/maven2/org/mongodb/bson-record-codec/4.11.1/bson-record-codec-4.11.1.jar -P /usr/local/spark/jars/
 
-# 3. Librerías de Python para todo el curso
+# 3. Librer as de Python para todo el curso (Scraping + Atlas + Spark)
 RUN pip install --no-cache-dir --upgrade pip && \
+    #pip install --no-cache-dir "pymongo[srv]" dnspython certifi selenium webdriver-manager pandas
     pip install --no-cache-dir "pymongo[srv]" dnspython selenium webdriver-manager pandas certifi
-
+RUN pip install --no-cache-dir streamlit seaborn openpyxl
+    
 # Variables del entorno gráfico
 ENV DISPLAY=:99
 ENV SCREEN_WIDTH=1368
@@ -60,5 +63,5 @@ RUN sed -i 's/\r$//' /usr/local/bin/start-vnc.sh && chmod +x /usr/local/bin/star
 EXPOSE 8888 5900 6080 4040
 
 # Inicia supervisord
-USER root
+# Iniciamos como root para evitar el error de setuid de la sesión anterior
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

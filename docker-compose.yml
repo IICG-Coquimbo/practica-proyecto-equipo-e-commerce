@@ -10,6 +10,7 @@ services:
       - "4040:4040"               # Interfaz web de Spark
       #- "5900:5900"               # Acceso VNC al escritorio
       #- "6080:6080"               # Acceso noVNC desde navegador
+      - "8501:8501" 
 
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
@@ -104,7 +105,7 @@ services:
       # Reemplaza usuario, password y cluster por tus datos reales de Atlas
       # --- AGREGADO ---
       # Habilita funciones administrativas en mongo-express
-      - ME_CONFIG_MONGODB_URL=mongodb+srv://usuario:password@cluster0.kthdyh1.mongodb.net/?retryWrites=true&w=majority
+      - ME_CONFIG_MONGODB_URL=mongodb+srv://JavieraMorales:Javi28122004@cluster0.as1zz9d.mongodb.net/ecommerce.processed_data?retryWrites=true&w=majority\
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
 
       # --- OPCIONAL ---
