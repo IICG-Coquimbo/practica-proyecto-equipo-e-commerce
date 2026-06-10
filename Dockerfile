@@ -41,7 +41,10 @@ RUN wget https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_
 
 # 3. Librerías de Python para todo el curso
 RUN pip install --no-cache-dir --upgrade pip && \
+    #pip install --no-cache-dir "pymongo[srv]" dnspython selenium webdriver-manager pandas certifi \
     pip install --no-cache-dir "pymongo[srv]" dnspython selenium webdriver-manager pandas certifi
+RUN pip install --no-cache-dir streamlit seaborn openpyxl
+    
 
 # Variables del entorno gráfico
 ENV DISPLAY=:99
@@ -57,7 +60,8 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 RUN sed -i 's/\r$//' /usr/local/bin/start-vnc.sh && chmod +x /usr/local/bin/start-vnc.sh
 
 # Puertos del contenedor
-EXPOSE 8888 5900 6080 4040
+EXPOSE 8888 5900 6080 4040  
+
 
 # Inicia supervisord
 USER root

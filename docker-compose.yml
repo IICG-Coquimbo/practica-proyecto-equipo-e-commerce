@@ -10,6 +10,7 @@ services:
       - "4040:4040"               # Interfaz web de Spark
       #- "5900:5900"               # Acceso VNC al escritorio
       #- "6080:6080"               # Acceso noVNC desde navegador
+      - "8501:8501" 
 
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
@@ -23,6 +24,11 @@ services:
       # --- AGREGADO ---
       # Fuerza el uso de JupyterLab de forma explícita
       - JUPYTER_ENABLE_LAB=yes
+
+      # --- OPCIONAL ---
+      # Puedes guardar aquí una cadena Atlas para usarla desde Python si quieres
+      # OJO: también puedes ponerla en un archivo .env para no exponer credenciales
+      # - MONGO_ATLAS_URI=mongodb+srv://usuario:password@cluster0.mongodb.net/?retryWrites=true&w=majority
 
     shm_size: "2gb"               # Evita fallos del navegador por poca memoria compartida
 
@@ -52,7 +58,7 @@ services:
     container_name: bigdata_mongodb
     platform: linux/amd64
     ports:
-      - "27040:27017"             # Puerto de MongoDB local
+      - "27018:27017"             # Puerto de MongoDB local
 
     volumes:
       - mongo_data:/data/db       # Guarda los datos de forma persistente
@@ -70,7 +76,7 @@ services:
     container_name: bigdata_ui_local
     restart: always
     ports:
-      - "8084:8081"
+      - "8081:8081"
     environment:
       # Se conecta al servicio 'database' definido arriba
       - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
@@ -99,7 +105,7 @@ services:
       # Reemplaza usuario, password y cluster por tus datos reales de Atlas
       # --- AGREGADO ---
       # Habilita funciones administrativas en mongo-express
-      - ME_CONFIG_MONGODB_URL=mongodb+srv://usuario:password@cluster0.kthdyh1.mongodb.net/?retryWrites=true&w=majority
+      - ME_CONFIG_MONGODB_URL=mongodb+srv://JavieraMorales:Javi28122004@cluster0.as1zz9d.mongodb.net/ecommerce.processed_data?retryWrites=true&w=majority\
       - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
 
       # --- OPCIONAL ---
@@ -143,3 +149,46 @@ networks:
     driver: bridge
     name: BigData_Network_UCN
 
+# -------------------------------------------------------------------
+# COSAS QUE PODRÍAS ELIMINAR SI EN ALGÚN MOMENTO USAS SOLO ATLAS
+# -------------------------------------------------------------------
+
+# Si en el futuro quisieras trabajar SOLO con Atlas, podrías comentar o eliminar:
+#
+# 1) El servicio database:
+#
+# database:
+#   image: mongo:latest
+#   container_name: bigdata_mongodb
+#   platform: linux/amd64
+#   ports:
+#     - "27017:27017"
+#   volumes:
+#     - mongo_data:/data/db
+#
+# 2) El servicio admin-db (el visualizador de Mongo LOCAL):
+#
+# admin-db:
+#   image: mongo-express:latest
+#   container_name: bigdata_ui_local
+#   ports:
+#     - "8081:8081"
+#   environment:
+#     - ME_CONFIG_MONGODB_URL=mongodb://database:27017/
+#
+# 3) El volumen local mongo_data:
+#
+# volumes:
+#   mongo_data:
+#
+# 4) En workspace, el depends_on hacia database y admin-db:
+#
+# depends_on:
+#   - database
+#   - admin-db
+#   - admin-db-atlas
+#
+# podría quedar solo así:
+#
+# depends_on:
+#   - admin-db-atlas
