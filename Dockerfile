@@ -44,6 +44,9 @@ RUN wget https://repo1.maven.org/maven2/org/mongodb/spark/mongo-spark-connector_
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir "pymongo[srv]" dnspython selenium webdriver-manager pandas certifi
 
+# Instalamos Streamlit y dependencias visuales usando pip
+RUN pip install --no-cache-dir streamlit seaborn openpyxl
+
 # Variables del entorno gráfico
 ENV DISPLAY=:99
 ENV SCREEN_WIDTH=1368

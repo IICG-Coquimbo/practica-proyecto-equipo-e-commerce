@@ -11,6 +11,8 @@ services:
       - "4040:4040"               # Interfaz web de Spark
       - "5901:5900"               # Cambiado a 5901 para evitar el bloqueo del puerto 5900
       - "6081:6080"               # Cambiado a 6081 para evitar conflictos en el navegador
+      - "8501:8501" 		  # Acceso a Streamlite
+
     volumes:
       - .:/home/jovyan/work       # Monta la carpeta del proyecto dentro del contenedor
     environment:
